@@ -1,7 +1,7 @@
 import { useTsController } from "@ts-react/form";
 import { Form } from "react-bootstrap";
 
-export default function AddressField() {
+export default function AmountField() {
   const {
     field: { onChange, value },
     error,
