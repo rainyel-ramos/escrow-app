@@ -20,9 +20,5 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.3.4",
-    "@ts-react/form": "^1.8.3",
-    "react-hook-form": "^7.49.3",
-    "zod": "^3.22.4"
   }
 }
