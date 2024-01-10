@@ -25,8 +25,8 @@ const { chains, publicClient } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'erc20-indexer',
-  projectId: 'bf583d6f62ad91e6aa73335e2ace5257',
+  appName: 'escrow-app',
+  projectId: '0ff2f2ab44c0672fe17266cca7157230',
   chains
 });
 const wagmiConfig = createConfig({
