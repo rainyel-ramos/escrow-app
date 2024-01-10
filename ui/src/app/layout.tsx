@@ -1,33 +1,6 @@
 'use client'
 
 import 'bootstrap/dist/css/bootstrap.css'
-
-import Head from 'next/head'
-
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return (
-    <html lang="en">
-      <Head>
-        <title>Escrow App</title>
-        <meta name="description" content="Escrow App" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <body>{children}</body>
-    </html>
-  )
-}
-
-/*
-'use client'
-
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-icons/font/bootstrap-icons.css'
 import '@rainbow-me/rainbowkit/styles.css';
 
 import Head from 'next/head'
@@ -70,8 +43,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
-        <title>NFT Indexer</title>
-        <meta name="description" content="AU Module 6 project" />
+        <title>Escrow App</title>
+        <meta name="description" content="Escrow App" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -81,8 +54,7 @@ export default function RootLayout({
             {children}
           </RainbowKitProvider>
         </WagmiConfig>
-      </body>
+        </body>
     </html>
   )
 }
-*/
