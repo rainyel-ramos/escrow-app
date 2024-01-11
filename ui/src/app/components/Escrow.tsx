@@ -12,7 +12,7 @@ export interface EscrowProps {
 
 export default function Escrow({escrowContract, escrowProperties}: EscrowProps) {
     const signer = useEthersSigner();
-    const [data, setData] = useState<BasicEscrow>();
+    const [isApproved, setIsApproved] = useState<boolean>();
 
     async function handleApprove() {
         //TODO - here add some value to change from not approved to approved
