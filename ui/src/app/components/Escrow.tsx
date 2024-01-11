@@ -7,9 +7,10 @@ import { useState } from 'react';
 
 export interface EscrowProps {
     escrowContract: Escrow;
+    escrowProperties: BasicEscrow;
 }
 
-export default function Escrow({escrowContract,}: EscrowProps) {
+export default function Escrow({escrowContract, escrowProperties}: EscrowProps) {
     const signer = useEthersSigner();
     const [data, setData] = useState<BasicEscrow>();
 
@@ -29,19 +30,19 @@ export default function Escrow({escrowContract,}: EscrowProps) {
             <ul className="fields">
                 <li>
                     <div> Arbiter </div>
-                    <div> {escrowContract.arbiter} </div>
+                    <div> {escrowProperties.arbiter} </div>
                 </li>
                 <li>
                     <div> Beneficiary </div>
-                    <div> {escrowContract.beneficiary} </div>
+                    <div> {escrowProperties.beneficiary} </div>
                 </li>
                 <li>
                     <div> Value </div>
-                    <div> {escrowContract.value} </div>
+                    <div> {escrowProperties.value} </div>
                 </li>
                 <div
                     className="button"
-                    id={address}
+                    id={escrowProperties.address}
                     onClick={(e) => {
                         e.preventDefault();
 
