@@ -5,7 +5,6 @@ import AmountField from "./AmountField";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { AddressSchema } from "../schemas/inputSchemas/addressSchema";
 import { EscrowSchema } from "../schemas/formSchemas/escrowSchema";
-import {approve} from '@/utils/randomUtils';
 import deploy from '@/utils/deploy';
 import { useEthersSigner } from "@/utils/hooks";
 import {ethers} from 'ethers';
@@ -35,16 +34,7 @@ export default function DeployEscrowForm() {
       address: escrowContractAddress,
       arbiter,
       beneficiary,
-      value: value.toString(),
-      handleApprove: async () => {
-        escrowContract.on('Approved', () => {
-          document.getElementById(escrowContract.address).className =
-            'complete';
-          document.getElementById(escrowContract.address).innerText =
-            "✓ It's been approved!";
-        });
-        await approve(escrowContract, signer);
-      },
+      value: value.toString()
     };
     //TODO - use a redux store to store the escrows
     setEscrows([...escrows, escrow]);
