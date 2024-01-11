@@ -16,7 +16,7 @@ export default function Escrow({escrowContract, escrowProperties}: EscrowProps) 
 
     async function handleApprove() {
         //TODO - here add some value to change from not approved to approved
-        escrowContract.on('Approved', () => {
+        escrowContract.on(escrowContract.getEvent('Approved'), () => {
             document.getElementById(escrowContract.address).className =
                 'complete';
             document.getElementById(escrowContract.address).innerText =
