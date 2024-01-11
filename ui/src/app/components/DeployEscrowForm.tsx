@@ -29,10 +29,10 @@ export default function DeployEscrowForm() {
     const arbiter = data.arbiter;
     const value = ethers.toBigInt(data.amount);
     const escrowContract = await deploy(signer, arbiter, beneficiary, value);
-
+    const escrowContractAddress = await escrowContract.getAddress();
 
     const escrow = {
-      address: escrowContract.address,
+      address: escrowContractAddress,
       arbiter,
       beneficiary,
       value: value.toString(),
