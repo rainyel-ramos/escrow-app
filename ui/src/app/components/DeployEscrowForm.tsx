@@ -27,7 +27,7 @@ export default function DeployEscrowForm() {
     // gets typesafe data when form is submitted
     const beneficiary = data.beneficiary;
     const arbiter = data.arbiter;
-    const value = ethers.BigNumber.from(data.amount);
+    const value = ethers.toBigInt(data.amount);
     const escrowContract = await deploy(signer, arbiter, beneficiary, value);
 
 
