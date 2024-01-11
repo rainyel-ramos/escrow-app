@@ -5,6 +5,11 @@ import AmountField from "./AmountField";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { AddressSchema } from "../schemas/inputSchemas/addressSchema";
 import { EscrowSchema } from "../schemas/formSchemas/escrowSchema";
+import {approve} from '@/utils/randomUtils';
+import deploy from '@/utils/deploy';
+import { useEthersSigner } from "@/utils/hooks";
+import {ethers} from 'ethers';
+
 
 // create the mapping
 const mapping = [
@@ -16,8 +21,33 @@ const mapping = [
 export const BaseDeployEscrowForm = createTsForm(mapping);
 
 export default function DeployEscrowForm() {
-  function onSubmit(data: z.infer<typeof EscrowSchema>) {
+  const signer = useEthersSigner();
+
+  async function onSubmit(data: z.infer<typeof EscrowSchema>) {
     // gets typesafe data when form is submitted
+    const beneficiary = data.beneficiary;
+    const arbiter = data.arbiter;
+    const value = ethers.BigNumber.from(data.amount);
+    const escrowContract = await deploy(signer, arbiter, beneficiary, value);
+
+
+    const escrow = {
+      address: escrowContract.address,
+      arbiter,
+      beneficiary,
+      value: value.toString(),
+      handleApprove: async () => {
+        escrowContract.on('Approved', () => {
+          document.getElementById(escrowContract.address).className =
+            'complete';
+          document.getElementById(escrowContract.address).innerText =
+            "✓ It's been approved!";
+        });
+        await approve(escrowContract, signer);
+      },
+    };
+    //TODO - use a redux store to store the escrows
+    setEscrows([...escrows, escrow]);
   }
 
   return (
@@ -34,7 +64,7 @@ export default function DeployEscrowForm() {
       {({ arbiter, beneficiary, amount }) => {
         return (
           <Container>
-            <Form.Group>
+            <Form.Group className="mb-3">
               <Row>
                 <Col>
                   {arbiter}
