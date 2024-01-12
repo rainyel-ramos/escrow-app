@@ -14,6 +14,8 @@ import {
   sepolia,
 } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 
 const { chains, publicClient } = configureChains(
@@ -51,7 +53,9 @@ export default function RootLayout({
       <body>
         <WagmiConfig config={wagmiConfig}>
           <RainbowKitProvider chains={chains}>
-            {children}
+            <Provider store={store}>
+              {children}
+            </Provider>
           </RainbowKitProvider>
         </WagmiConfig>
         </body>
