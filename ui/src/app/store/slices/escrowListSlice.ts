@@ -1,11 +1,7 @@
-import { BasicEscrow } from '@/utils/types';
+import { BasicEscrow, EscrowListState } from '@/utils/types';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
-
-export interface EscrowListState{
-    escrowList: BasicEscrow[]
-}
 
 const initialState: EscrowListState = {
     escrowList: []

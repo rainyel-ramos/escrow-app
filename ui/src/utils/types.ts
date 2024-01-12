@@ -5,3 +5,7 @@ export interface BasicEscrow {
     value: string;
     isApproved: boolean;
 }
+
+export interface EscrowListState{
+    escrowList: BasicEscrow[]
+}
