@@ -8,6 +8,9 @@ import { EscrowSchema } from "../schemas/formSchemas/escrowSchema";
 import deploy from '@/utils/deploy';
 import { useEthersSigner } from "@/utils/hooks";
 import {ethers} from 'ethers';
+import { useAppSelector, useAppDispatch } from '@/app/store/hooks';
+import { addEscrow } from "../store/slices/escrowListSlice";
+import { BasicEscrow } from "@/utils/types";
 
 
 // create the mapping
@@ -20,6 +23,7 @@ const mapping = [
 export const BaseDeployEscrowForm = createTsForm(mapping);
 
 export default function DeployEscrowForm() {
+  const dispatch = useAppDispatch();
   const signer = useEthersSigner();
 
   async function onSubmit(data: z.infer<typeof EscrowSchema>) {
@@ -30,14 +34,15 @@ export default function DeployEscrowForm() {
     const escrowContract = await deploy(signer, arbiter, beneficiary, value);
     const escrowContractAddress = await escrowContract.getAddress();
 
-    const escrow = {
-      address: escrowContractAddress,
+    const escrow: BasicEscrow = {
+      address: escrowContractAddress as `0x${string}`,
       arbiter,
       beneficiary,
-      value: value.toString()
+      value: value.toString(),
+      isApproved: false
     };
     //TODO - use a redux store to store the escrows
-    setEscrows([...escrows, escrow]);
+    dispatch(addEscrow(escrow));
   }
 
   return (
