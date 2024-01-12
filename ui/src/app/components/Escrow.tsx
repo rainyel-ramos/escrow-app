@@ -1,28 +1,28 @@
-import { Escrow } from '@/typechain';
 import { useEthersSigner } from '@/utils/hooks';
 import { approve } from '@/utils/randomUtils';
 import { BasicEscrow } from '@/utils/types';
-import { useState } from 'react';
+import { useContractEvent } from 'wagmi';
+import EscrowAbi from '@/artifacts/contracts/Escrow.sol/Escrow.json';
 
 
 export interface EscrowProps {
-    escrowContract: Escrow;
     escrowProperties: BasicEscrow;
 }
 
-export default function Escrow({escrowContract, escrowProperties}: EscrowProps) {
+export default function Escrow({escrowProperties}: EscrowProps) {
     const signer = useEthersSigner();
-    const [isApproved, setIsApproved] = useState<boolean>();
-
+    const unwatch = useContractEvent({
+        address: escrowProperties.address,
+        abi: EscrowAbi.abi,
+        eventName: 'Approved',
+        listener(log) {
+          console.log(log)
+          //TODO - here change the status of the contract component
+          unwatch?.();
+        },
+    })
     async function handleApprove() {
-        //TODO - here add some value to change from not approved to approved
-        escrowContract.on(escrowContract.getEvent('Approved'), () => {
-            document.getElementById(escrowContract.address).className =
-                'complete';
-            document.getElementById(escrowContract.address).innerText =
-                "✓ It's been approved!";
-        });
-        await approve(escrowContract, signer);
+        await approve(signer, escrowProperties.address);
     }
 
     return (
