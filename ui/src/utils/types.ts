@@ -1,6 +1,7 @@
 export interface BasicEscrow {
-    address: string;
+    address: `0x${string}`;
     arbiter: string;
     beneficiary: string;
     value: string;
+    isApproved: boolean;
 }
