@@ -5,13 +5,17 @@ export default function AmountField() {
   const {
     field: { onChange, value },
     error,
-  } = useTsController<string>();
+  } = useTsController<number>();
 
   return (
     <>
       <Form.Label>Amount</Form.Label>
-      <Form.Control id='address' type="text" 
-        onChange={(e) => onChange(e.target.value)}
+      <Form.Control id='amount' type="number" 
+        onChange={(e) => {
+          const value = parseInt(e.target.value);
+          if (isNaN(value)) onChange(undefined);
+          else onChange(value);
+        }}
         value={value ? value : ""} 
       />
       {error && error.errorMessage}
