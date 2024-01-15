@@ -3,6 +3,8 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import { Col, Container, Row } from 'react-bootstrap'
 import DeployEscrowForm from './components/DeployEscrowForm'
+import EscrowList from './components/EscrowList'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 
 export default function Home() {
@@ -15,7 +17,10 @@ export default function Home() {
             <DeployEscrowForm />
           </Col>
           <Col>
-          {/* here the deployed contracts */}
+            <EscrowList />
+          </Col>
+          <Col>
+            <ConnectButton/>
           </Col>
         </Row>
       </Container>
