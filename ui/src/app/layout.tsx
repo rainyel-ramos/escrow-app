@@ -1,6 +1,7 @@
 'use client'
 
 import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import '@rainbow-me/rainbowkit/styles.css';
 
 import Head from 'next/head'
@@ -16,6 +17,7 @@ import {
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { Provider } from 'react-redux';
 import store from './store/store';
+import Footer from './components/Footer';
 
 
 const { chains, publicClient } = configureChains(
@@ -58,6 +60,7 @@ export default function RootLayout({
             </Provider>
           </RainbowKitProvider>
         </WagmiConfig>
+        <Footer />
         </body>
     </html>
   )
