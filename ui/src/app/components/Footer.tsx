@@ -14,7 +14,7 @@ export default function Footer() {
           </Col>
           <Col>
             <p>
-              <a href="https://github.com/rayniel95/blockexplorer">
+              <a href="https://github.com/rainyel-ramos/escrow-app">
                 <i className="bi bi-github"></i> take a look to the code
               </a>
             </p>
